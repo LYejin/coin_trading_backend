@@ -1,6 +1,7 @@
 package com.project.coinTrade.controller;
 
 import com.project.coinTrade.annotation.LogExecution;
+import com.project.coinTrade.dto.APIResult;
 import com.project.coinTrade.service.CoinService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -11,12 +12,13 @@ import java.util.HashMap;
 import java.util.Map;
 
 @RestController
+@RequestMapping("/coin")
 @RequiredArgsConstructor
 public class CoinController {
 
     private final CoinService coinService;
 
-    @PostMapping("/coin/test")
+    @PostMapping("/test")
     @LogExecution
     public Map<String, Object> test(@RequestBody Map<String, Object> paramMap, HttpServletRequest request, HttpServletResponse response) throws Exception {
         coinService.test(paramMap, request, response);
@@ -26,5 +28,26 @@ public class CoinController {
         hii.put("hii", "jiii");
 
         return hii;
+    }
+
+    @PostMapping("/order")
+    @LogExecution
+    public APIResult order(@RequestBody Map<String, Object> paramMap, HttpServletRequest request, HttpServletResponse response) throws Exception {
+        APIResult apiResult = coinService.order(paramMap, request, response);
+        return apiResult;
+    }
+
+    @PostMapping("/balance")
+    @LogExecution
+    public APIResult balance(@RequestBody Map<String, Object> paramMap, HttpServletRequest request, HttpServletResponse response) throws Exception {
+        APIResult apiResult = coinService.balance(paramMap, request, response);
+        return apiResult;
+    }
+
+    @PostMapping("/chance")
+    @LogExecution
+    public APIResult chance(@RequestBody Map<String, Object> paramMap, HttpServletRequest request, HttpServletResponse response) throws Exception {
+        APIResult apiResult = coinService.chance(paramMap, request, response);
+        return apiResult;
     }
 }
